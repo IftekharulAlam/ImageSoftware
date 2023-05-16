@@ -49,6 +49,7 @@ public class MainPageController implements Initializable {
 
     private String openedImage;
     private WritableImage wImage;
+    private int selection = 1;
 
     /**
      * Initializes the controller class.
@@ -129,6 +130,110 @@ public class MainPageController implements Initializable {
                 a.show();
             }
 
+        }
+
+    }
+
+    @FXML
+    private void option1ButtonClicked(ActionEvent event) {
+        selection = 1;
+    }
+
+    @FXML
+    private void option2ButtonClicked(ActionEvent event) {
+        selection = 2;
+    }
+
+    @FXML
+    private void option3ButtonClicked(ActionEvent event) {
+        selection = 3;
+    }
+
+    @FXML
+    private void myimageViewMouseEntered(MouseEvent event) {
+        System.out.println(selection);
+        if (selection == 1) {
+            Image image = new Image(openedImage);
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+
+            //Creating a writable image 
+            wImage = new WritableImage(width, height);
+
+            //Reading color from the loaded image 
+            PixelReader pixelReader = image.getPixelReader();
+
+            //getting the pixel writer 
+            PixelWriter writer = wImage.getPixelWriter();
+
+            //Reading the color of the image 
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    //Retrieving the color of the pixel of the loaded image   
+                    Color color = pixelReader.getColor(x, y);
+
+                    //Setting the color to the writable image 
+                    writer.setColor(x, y, color.brighter());
+
+                }
+            }
+            //Setting the view for the writable image 
+            myImageView.setImage(wImage);
+
+        } else if (selection == 2) {
+            Image image = new Image(openedImage);
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+
+            //Creating a writable image 
+            wImage = new WritableImage(width, height);
+
+            //Reading color from the loaded image 
+            PixelReader pixelReader = image.getPixelReader();
+
+            //getting the pixel writer 
+            PixelWriter writer = wImage.getPixelWriter();
+
+            //Reading the color of the image 
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    //Retrieving the color of the pixel of the loaded image   
+                    Color color = pixelReader.getColor(x, y);
+
+                    //Setting the color to the writable image 
+                    writer.setColor(x, y, color.grayscale());
+
+                }
+            }
+            //Setting the view for the writable image 
+            myImageView.setImage(wImage);
+        } else if (selection == 3) {
+            Image image = new Image(openedImage);
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+
+            //Creating a writable image 
+            wImage = new WritableImage(width, height);
+
+            //Reading color from the loaded image 
+            PixelReader pixelReader = image.getPixelReader();
+
+            //getting the pixel writer 
+            PixelWriter writer = wImage.getPixelWriter();
+
+            //Reading the color of the image 
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    //Retrieving the color of the pixel of the loaded image   
+                    Color color = pixelReader.getColor(x, y);
+
+                    //Setting the color to the writable image 
+                    writer.setColor(x, y, color.darker());
+
+                }
+            }
+            //Setting the view for the writable image 
+            myImageView.setImage(wImage);
         }
 
     }

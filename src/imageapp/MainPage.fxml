@@ -84,12 +84,12 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fx:id="myImageView" fitHeight="367.0" fitWidth="457.0" layoutX="5.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="myImageView" fitHeight="367.0" fitWidth="457.0" layoutX="5.0" layoutY="3.0" onMouseEntered="#myimageViewMouseEntered" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="openButton" layoutX="479.0" layoutY="14.0" mnemonicParsing="false" onAction="#openButtonClicked" text="Open" />
             <Button fx:id="convertButton" layoutX="479.0" layoutY="52.0" mnemonicParsing="false" onAction="#convertButtonClicked" text="Convert" />
-            <Button layoutX="482.0" layoutY="108.0" mnemonicParsing="false" text="Color 1" />
-            <Button layoutX="482.0" layoutY="140.0" mnemonicParsing="false" text="Color 2" />
-            <Button layoutX="482.0" layoutY="175.0" mnemonicParsing="false" text="Color 3" />
+            <Button layoutX="482.0" layoutY="108.0" mnemonicParsing="false" onAction="#option1ButtonClicked" text="Option 1" />
+            <Button layoutX="482.0" layoutY="140.0" mnemonicParsing="false" onAction="#option2ButtonClicked" text="Option 2" />
+            <Button layoutX="482.0" layoutY="175.0" mnemonicParsing="false" onAction="#option3ButtonClicked" text="Option 3" />
             <Button layoutX="564.0" layoutY="320.0" mnemonicParsing="false" onAction="#saveButtonclicked" text="Save" />
          </children>
     </AnchorPane>
