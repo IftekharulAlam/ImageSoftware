@@ -32,33 +32,27 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageapp.MainPageController">
+<VBox prefHeight="529.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageapp.MainPageController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#NewMenubuttonClicked" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#OpenMenuButtonClicked" text="Open…" />
+            <MenuItem mnemonicParsing="false" onAction="#SaveMenuButtonClicked" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#SaveAsMenuButtonClicked" text="Save As…" />
+            <MenuItem mnemonicParsing="false" onAction="#PreferenceMenuButtonClicked" text="Preferences…" />
+            <MenuItem mnemonicParsing="false" onAction="#quietMenunuButtonClicked" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
@@ -77,20 +71,20 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" onAction="#AboutButtonClicked" text="About MyHelloApp" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="425.0" prefWidth="711.0" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fx:id="myImageView" fitHeight="367.0" fitWidth="457.0" layoutX="5.0" layoutY="3.0" onMouseEntered="#myimageViewMouseEntered" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="openButton" layoutX="479.0" layoutY="14.0" mnemonicParsing="false" onAction="#openButtonClicked" text="Open" />
-            <Button fx:id="convertButton" layoutX="479.0" layoutY="52.0" mnemonicParsing="false" onAction="#convertButtonClicked" text="Convert" />
-            <Button layoutX="482.0" layoutY="108.0" mnemonicParsing="false" onAction="#option1ButtonClicked" text="Option 1" />
-            <Button layoutX="482.0" layoutY="140.0" mnemonicParsing="false" onAction="#option2ButtonClicked" text="Option 2" />
-            <Button layoutX="482.0" layoutY="175.0" mnemonicParsing="false" onAction="#option3ButtonClicked" text="Option 3" />
-            <Button layoutX="564.0" layoutY="320.0" mnemonicParsing="false" onAction="#saveButtonclicked" text="Save" />
+            <Button fx:id="openButton" layoutX="604.0" layoutY="21.0" mnemonicParsing="false" onAction="#openButtonClicked" text="Open" />
+            <Button fx:id="convertButton" layoutX="604.0" layoutY="59.0" mnemonicParsing="false" onAction="#convertButtonClicked" text="Convert" />
+            <Button layoutX="607.0" layoutY="115.0" mnemonicParsing="false" onAction="#option1ButtonClicked" text="Option 1" />
+            <Button layoutX="607.0" layoutY="147.0" mnemonicParsing="false" onAction="#option2ButtonClicked" text="Option 2" />
+            <Button layoutX="607.0" layoutY="182.0" mnemonicParsing="false" onAction="#option3ButtonClicked" text="Option 3" />
+            <Button layoutX="613.0" layoutY="227.0" mnemonicParsing="false" onAction="#saveButtonclicked" text="Save" />
+            <Canvas fx:id="myCanvas" height="450.0" layoutX="14.0" layoutY="14.0" onMouseDragged="#myCanvasMouseDragged" onMousePressed="#myCanvasMousePressed" width="561.0" />
          </children>
     </AnchorPane>
   </children>
