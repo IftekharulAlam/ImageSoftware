@@ -28,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -40,18 +41,19 @@ import javax.imageio.ImageIO;
  * @author Iftekharul Alam
  */
 public class MainPageController implements Initializable {
-    
+
     @FXML
     private Button openButton;
     @FXML
     private Button convertButton;
     @FXML
     private Canvas myCanvas;
-    
+
     private String openedImage;
     private WritableImage wImage;
-    private int selection = 1;
+    private int selection = 0;
     private GraphicsContext graphicContext;
+    private String myText = "";
 
     /**
      * Initializes the controller class.
@@ -60,7 +62,12 @@ public class MainPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
+    public void setMyText(String text) {
+        myText = text;
+
+    }
+
     @FXML
     private void NewMenubuttonClicked(ActionEvent event) {
         Parent root = null;
@@ -69,67 +76,66 @@ public class MainPageController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle("My Image Editor");
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     private void OpenMenuButtonClicked(ActionEvent event) {
         this.openButtonClicked(event);
     }
-    
+
     @FXML
     private void SaveMenuButtonClicked(ActionEvent event) {
         this.saveButtonclicked(event);
     }
-    
+
     @FXML
     private void SaveAsMenuButtonClicked(ActionEvent event) {
-        
-        
-        
+
     }
-    
+
     @FXML
     private void PreferenceMenuButtonClicked(ActionEvent event) {
-          Parent root = null;
+        Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("PreferencePage.fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle("My Image Editor");
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
     private void quietMenunuButtonClicked(ActionEvent event) {
-        
+
         Platform.exit();
         System.exit(0);
     }
-    
+
     @FXML
     private void openButtonClicked(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        
+
         Stage stage = new Stage();
         File selectedFile = fileChooser.showOpenDialog(stage);
         openedImage = selectedFile.toURI().toString();
         Image image = new Image(openedImage);
-        
+
         graphicContext = myCanvas.getGraphicsContext2D();
         graphicContext.drawImage(image, 2, 2, 500, 500);
+        myCanvas.autosize();
     }
-    
+
     @FXML
     private void convertButtonClicked(ActionEvent event) {
         Image image = new Image(openedImage);
@@ -153,31 +159,34 @@ public class MainPageController implements Initializable {
 
                 //Setting the color to the writable image 
                 writer.setColor(x, y, color.grayscale());
-                
+
             }
         }
         //Setting the view for the writable image 
 
         graphicContext.drawImage(wImage, 2, 2, 500, 500);
     }
-    
+
     @FXML
     private void option1ButtonClicked(ActionEvent event) {
+        selection = 1;
     }
-    
+
     @FXML
     private void option2ButtonClicked(ActionEvent event) {
+        selection = 3;
     }
-    
+
     @FXML
     private void option3ButtonClicked(ActionEvent event) {
+        selection = 4;
     }
-    
+
     @FXML
     private void saveButtonclicked(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         Alert a = new Alert(Alert.AlertType.NONE);
-        
+
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg")
         );
@@ -186,10 +195,10 @@ public class MainPageController implements Initializable {
         if (selectedFile != null) {
             try {
                 WritableImage writableImage = new WritableImage(1365, 400);
-                
+
                 myCanvas.snapshot(null, writableImage);
                 RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-                
+
                 ImageIO.write(renderedImage, "jpg", selectedFile);
             } catch (IOException ex) {
                 // Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,38 +206,111 @@ public class MainPageController implements Initializable {
                 a.setAlertType(Alert.AlertType.CONFIRMATION);
                 a.show();
             }
-            
+
         }
     }
-    
+
     @FXML
     private void myCanvasMouseDragged(MouseEvent event) {
-        graphicContext.lineTo(event.getX(), event.getY());
-        graphicContext.stroke();
-        
+        if (selection == 1) {
+            graphicContext.lineTo(event.getX(), event.getY());
+            graphicContext.stroke();
+        } else if (selection == 2) {
+            //graphicContext.fillText(myText, event.getX(), event.getY());
+
+        } else if (selection == 3) {
+
+        } else if (selection == 4) {
+
+        }
+
     }
-    
+
     @FXML
     private void myCanvasMousePressed(MouseEvent event) {
-        graphicContext.beginPath();
-        graphicContext.moveTo(event.getX(), event.getY());
-        graphicContext.stroke();
+
+        if (selection == 1) {
+            graphicContext.beginPath();
+            graphicContext.moveTo(event.getX(), event.getY());
+            graphicContext.stroke();
+        } else if (selection == 2) {
+            graphicContext.fillText(myText, event.getX(), event.getY());
+
+        } else if (selection == 3) {
+
+            graphicContext.fillRect(event.getX(), event.getY(), 100.0, 100.0);
+            graphicContext.moveTo(event.getX(), event.getY());
+
+        }
+
     }
 
     @FXML
     private void AboutButtonClicked(ActionEvent event) {
-          Parent root = null;
+        Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("About.fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle("My Image Editor");
         stage.setScene(scene);
         stage.show();
+
     }
-    
+
+    @FXML
+    private void AddTextButtonClicked(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddTextScreen.fxml"));
+        Stage stage = new Stage();
+        //stage.initOwner(btn1.getScene().getWindow());
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.setTitle("Text");
+        // showAndWait will block execution until the window closes...
+        stage.showAndWait();
+
+        AddTextScreenController controller = loader.getController();
+        myText = controller.getText();
+        System.out.println(myText);
+        if (myText != "") {
+            selection = 2;
+        }
+
+    }
+
+    @FXML
+    private void clearButtonClicked(ActionEvent event) {
+        graphicContext.clearRect(0, 0, myCanvas.getWidth(), myCanvas.getHeight());
+        Image image = new Image(openedImage);
+
+        graphicContext = myCanvas.getGraphicsContext2D();
+        graphicContext.drawImage(image, 2, 2, 500, 500);
+    }
+
+    @FXML
+    private void onKeyPressed(KeyEvent event) {
+
+        if (selection == 1) {
+//            graphicContext.beginPath();
+//            graphicContext.moveTo(event.getX(), event.getY());
+//            graphicContext.stroke();
+        } else if (selection == 2) {
+            //  graphicContext.fillText(myText, event.getX(), event.getY());
+
+        } else if (selection == 3) {
+
+            graphicContext.moveTo(100, 100);
+
+        }
+
+    }
+
+    @FXML
+    private void onKeyReleased(KeyEvent event) {
+    }
+
 }
