@@ -33,18 +33,25 @@
 -->
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="124.0" prefWidth="269.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageapp.AddTextScreenController">
+<VBox prefHeight="144.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageapp.AddTextScreenController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="20.0" layoutY="30.0" text="Text" />
-            <TextField fx:id="inputTextField" layoutX="52.0" layoutY="26.0" prefHeight="25.0" prefWidth="140.0" />
-            <Button fx:id="AddButton" layoutX="203.0" layoutY="85.0" mnemonicParsing="false" onAction="#AddbuttonClicked" text="Add" />
+            <Label layoutX="17.0" layoutY="22.0" text="Text" />
+            <TextField fx:id="inputTextField" layoutX="52.0" layoutY="18.0" prefHeight="25.0" prefWidth="140.0" />
+            <Button fx:id="AddButton" layoutX="260.0" layoutY="87.0" mnemonicParsing="false" onAction="#AddbuttonClicked" text="Add" />
+            <ComboBox fx:id="fontComboBox" layoutX="52.0" layoutY="62.0" prefHeight="25.0" prefWidth="140.0" />
+            <TextField fx:id="sizeTextField" layoutX="52.0" layoutY="100.0" prefHeight="25.0" prefWidth="49.0" />
+            <Label layoutX="18.0" layoutY="66.0" text="Font" />
+            <Label layoutX="20.0" layoutY="104.0" text="Size" />
+            <Label fx:id="exampleLabel" layoutX="240.0" layoutY="39.0" text="aaAABBcc" />
+            <Label layoutX="108.0" layoutY="104.0" text="(0 - 100)" />
          </children>
     </AnchorPane>
   </children>

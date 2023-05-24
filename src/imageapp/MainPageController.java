@@ -31,6 +31,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -54,6 +55,8 @@ public class MainPageController implements Initializable {
     private int selection = 0;
     private GraphicsContext graphicContext;
     private String myText = "";
+    private String selectedFont = "Verdana";
+    private int selectedSize = 10;
 
     /**
      * Initializes the controller class.
@@ -234,6 +237,8 @@ public class MainPageController implements Initializable {
             graphicContext.moveTo(event.getX(), event.getY());
             graphicContext.stroke();
         } else if (selection == 2) {
+
+            graphicContext.setFont(Font.font(selectedFont, selectedSize));
             graphicContext.fillText(myText, event.getX(), event.getY());
 
         } else if (selection == 3) {
@@ -275,7 +280,12 @@ public class MainPageController implements Initializable {
 
         AddTextScreenController controller = loader.getController();
         myText = controller.getText();
+        selectedFont = controller.getFont();
+        selectedSize = controller.getSize();
         System.out.println(myText);
+        System.out.println(selectedFont);
+        System.out.println(selectedSize);
+
         if (myText != "") {
             selection = 2;
         }
