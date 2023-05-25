@@ -82,9 +82,9 @@
             <Button fx:id="convertButton" layoutX="604.0" layoutY="59.0" mnemonicParsing="false" onAction="#convertButtonClicked" text="Convert" />
             <Button layoutX="607.0" layoutY="115.0" mnemonicParsing="false" onAction="#option1ButtonClicked" text="Option 1 Stoke" />
             <Button layoutX="607.0" layoutY="147.0" mnemonicParsing="false" onAction="#option2ButtonClicked" text="Option 2 Rect" />
-            <Button layoutX="607.0" layoutY="182.0" mnemonicParsing="false" onAction="#option3ButtonClicked" text="Option 3" />
+            <Button layoutX="607.0" layoutY="182.0" mnemonicParsing="false" onAction="#option3ButtonClicked" text="Option 3 Circle" />
             <Button layoutX="642.0" layoutY="452.0" mnemonicParsing="false" onAction="#saveButtonclicked" text="Save" />
-            <Canvas fx:id="myCanvas" height="500.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseDragged="#myCanvasMouseDragged" onMousePressed="#myCanvasMousePressed" width="500.0" />
+            <Canvas fx:id="myCanvas" height="500.0" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseDragged="#myCanvasMouseDragged" onMousePressed="#myCanvasMousePressed" onMouseReleased="#myCanvasMouseReleased" width="500.0" />
             <Button layoutX="607.0" layoutY="214.0" mnemonicParsing="false" onAction="#AddTextButtonClicked" text="Add Text" />
             <Button layoutX="613.0" layoutY="252.0" mnemonicParsing="false" onAction="#clearButtonClicked" text="Clear" />
          </children>

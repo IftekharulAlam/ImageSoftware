@@ -5,6 +5,7 @@
  */
 package imageapp;
 
+import ImageAppMainClassPackage.ImageAppMainClass;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -58,6 +59,13 @@ public class MainPageController implements Initializable {
     private String selectedFont = "Verdana";
     private int selectedSize = 10;
 
+    private double firstX;
+    private double firstY;
+    private double lastX;
+    private double lastY;
+
+    private ImageAppMainClass imageAppMainClass = new ImageAppMainClass();
+
     /**
      * Initializes the controller class.
      */
@@ -77,7 +85,7 @@ public class MainPageController implements Initializable {
         try {
             root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
         } catch (IOException ex) {
-            Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(MainPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Scene scene = new Scene(root);
@@ -242,12 +250,14 @@ public class MainPageController implements Initializable {
             graphicContext.fillText(myText, event.getX(), event.getY());
 
         } else if (selection == 3) {
+            firstX = event.getX();
+            firstY = event.getY();
 
-            graphicContext.fillRect(event.getX(), event.getY(), 100.0, 100.0);
-            graphicContext.moveTo(event.getX(), event.getY());
+        } else if (selection == 4) {
+            firstX = event.getX();
+            firstY = event.getY();
 
         }
-
     }
 
     @FXML
@@ -282,9 +292,7 @@ public class MainPageController implements Initializable {
         myText = controller.getText();
         selectedFont = controller.getFont();
         selectedSize = controller.getSize();
-        System.out.println(myText);
-        System.out.println(selectedFont);
-        System.out.println(selectedSize);
+       
 
         if (myText != "") {
             selection = 2;
@@ -321,6 +329,27 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void onKeyReleased(KeyEvent event) {
+    }
+
+    @FXML
+    private void myCanvasMouseReleased(MouseEvent event) {
+
+        if (selection == 1) {
+
+        } else if (selection == 2) {
+
+        } else if (selection == 3) {
+            lastX = event.getX();
+            lastY = event.getY();
+            graphicContext.fillRect(firstX, firstY, lastX - firstX, lastY - firstY);
+
+        } else if (selection == 4) {
+            lastX = event.getX();
+            lastY = event.getY();
+            graphicContext.fillOval(firstX, firstY, lastX - firstX, lastX - firstX);
+
+        }
+
     }
 
 }
