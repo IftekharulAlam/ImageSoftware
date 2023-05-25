@@ -257,7 +257,12 @@ public class MainPageController implements Initializable {
             firstX = event.getX();
             firstY = event.getY();
 
+        } else if (selection == 5) {
+            firstX = event.getX();
+            firstY = event.getY();
+
         }
+
     }
 
     @FXML
@@ -292,7 +297,6 @@ public class MainPageController implements Initializable {
         myText = controller.getText();
         selectedFont = controller.getFont();
         selectedSize = controller.getSize();
-       
 
         if (myText != "") {
             selection = 2;
@@ -348,7 +352,31 @@ public class MainPageController implements Initializable {
             lastY = event.getY();
             graphicContext.fillOval(firstX, firstY, lastX - firstX, lastX - firstX);
 
+        } else if (selection == 5) {
+            // graphicContext.fillPolygon(xPoints, yPoints, selection);
+            lastX = event.getX();
+            lastY = event.getY();
+            graphicContext.fillRoundRect(firstX, firstY, lastX - firstX, lastX - firstX, 10.0, 10.0);
         }
+
+    }
+
+    @FXML
+    private void option4ButtonClicked(ActionEvent event) {
+        selection = 5;
+    }
+
+    @FXML
+    private void AddColorButtonClicked(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ColorPage.fxml"));
+        Stage stage = new Stage();
+        //stage.initOwner(btn1.getScene().getWindow());
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.setTitle("Color");
+        // showAndWait will block execution until the window closes...
+        stage.showAndWait();
+
+        ColorPageController controller = loader.getController();
 
     }
 
