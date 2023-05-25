@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -20,8 +21,6 @@ import javafx.scene.control.TextField;
  */
 public class ColorPageController implements Initializable {
 
-    @FXML
-    private Button saveButtonColor;
     @FXML
     private TextField redTextfield;
     @FXML
@@ -38,6 +37,9 @@ public class ColorPageController implements Initializable {
     private Button redButton;
     @FXML
     private Button yellowButton;
+    private Color myColor;
+    @FXML
+    private Button saveButton;
 
     /**
      * Initializes the controller class.
@@ -52,28 +54,44 @@ public class ColorPageController implements Initializable {
 
     }
 
+    public Color returnColor() {
+        return myColor;
+
+    }
+
     @FXML
     private void saveButtonClicked(ActionEvent event) {
+        int red = Integer.parseInt(redTextfield.getText());
+        int green = Integer.parseInt(greenTextField.getText());
+        int blue = Integer.parseInt(blueTextField.getText());
+        myColor = Color.rgb(red, green, blue);
+        saveButton.getScene().getWindow().hide();
+
     }
 
     @FXML
     private void greenButtonClicked(ActionEvent event) {
-         System.out.println("Green");
+        myColor = Color.GREEN;
+        greenButton.getScene().getWindow().hide();
+
     }
 
     @FXML
     private void blueButtonClicked(ActionEvent event) {
-        System.out.println("Blue");
+        myColor = Color.BLUE;
+        blueButton.getScene().getWindow().hide();
     }
 
     @FXML
     private void redButtonClicked(ActionEvent event) {
-         System.out.println("Red");
+        myColor = Color.RED;
+        redButton.getScene().getWindow().hide();
     }
 
     @FXML
     private void yellowButtonClicked(ActionEvent event) {
-         System.out.println("yellow");
+        myColor = Color.YELLOW;
+        yellowButton.getScene().getWindow().hide();
     }
 
 }

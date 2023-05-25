@@ -32,6 +32,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -63,6 +64,7 @@ public class MainPageController implements Initializable {
     private double firstY;
     private double lastX;
     private double lastY;
+    private Color myColor = Color.BLACK;
 
     private ImageAppMainClass imageAppMainClass = new ImageAppMainClass();
 
@@ -224,10 +226,10 @@ public class MainPageController implements Initializable {
     @FXML
     private void myCanvasMouseDragged(MouseEvent event) {
         if (selection == 1) {
+            graphicContext.setStroke(myColor);
             graphicContext.lineTo(event.getX(), event.getY());
             graphicContext.stroke();
         } else if (selection == 2) {
-            //graphicContext.fillText(myText, event.getX(), event.getY());
 
         } else if (selection == 3) {
 
@@ -241,6 +243,7 @@ public class MainPageController implements Initializable {
     private void myCanvasMousePressed(MouseEvent event) {
 
         if (selection == 1) {
+            graphicContext.setStroke(myColor);
             graphicContext.beginPath();
             graphicContext.moveTo(event.getX(), event.getY());
             graphicContext.stroke();
@@ -317,15 +320,10 @@ public class MainPageController implements Initializable {
     private void onKeyPressed(KeyEvent event) {
 
         if (selection == 1) {
-//            graphicContext.beginPath();
-//            graphicContext.moveTo(event.getX(), event.getY());
-//            graphicContext.stroke();
+
         } else if (selection == 2) {
-            //  graphicContext.fillText(myText, event.getX(), event.getY());
 
         } else if (selection == 3) {
-
-            graphicContext.moveTo(100, 100);
 
         }
 
@@ -343,17 +341,20 @@ public class MainPageController implements Initializable {
         } else if (selection == 2) {
 
         } else if (selection == 3) {
+            graphicContext.setFill(myColor);
             lastX = event.getX();
             lastY = event.getY();
             graphicContext.fillRect(firstX, firstY, lastX - firstX, lastY - firstY);
 
         } else if (selection == 4) {
+            graphicContext.setFill(myColor);
             lastX = event.getX();
             lastY = event.getY();
             graphicContext.fillOval(firstX, firstY, lastX - firstX, lastX - firstX);
 
         } else if (selection == 5) {
-            // graphicContext.fillPolygon(xPoints, yPoints, selection);
+
+            graphicContext.setFill(myColor);
             lastX = event.getX();
             lastY = event.getY();
             graphicContext.fillRoundRect(firstX, firstY, lastX - firstX, lastX - firstX, 10.0, 10.0);
@@ -375,8 +376,8 @@ public class MainPageController implements Initializable {
         stage.setTitle("Color");
         // showAndWait will block execution until the window closes...
         stage.showAndWait();
-
         ColorPageController controller = loader.getController();
+        myColor = controller.returnColor();
 
     }
 
