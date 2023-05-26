@@ -61,11 +61,19 @@ public class ColorPageController implements Initializable {
 
     @FXML
     private void saveButtonClicked(ActionEvent event) {
-        int red = Integer.parseInt(redTextfield.getText());
-        int green = Integer.parseInt(greenTextField.getText());
-        int blue = Integer.parseInt(blueTextField.getText());
-        myColor = Color.rgb(red, green, blue);
-        saveButton.getScene().getWindow().hide();
+
+        if (hexTextField.getText() == "") {
+            int red = Integer.parseInt(redTextfield.getText());
+            int green = Integer.parseInt(greenTextField.getText());
+            int blue = Integer.parseInt(blueTextField.getText());
+            myColor = Color.rgb(red, green, blue);
+            saveButton.getScene().getWindow().hide();
+
+        } else {
+            String s = "0x" + hexTextField.getText();
+            myColor = Color.web(s);
+            saveButton.getScene().getWindow().hide();
+        }
 
     }
 
